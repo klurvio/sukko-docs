@@ -48,8 +48,8 @@ Examples:
    **Language**: Go 1.22+
    **Services**: ws-server, ws-gateway, provisioning
    **Infrastructure**: Kubernetes (DOKS), Helm, Terraform
-   **Messaging**: Redpanda/Kafka (franz-go), NATS (broadcast bus)
-   **Storage**: PostgreSQL (provisioning), Valkey (optional)
+   **Messaging**: Redpanda/Kafka (franz-go), Valkey (broadcast bus)
+   **Storage**: PostgreSQL (provisioning), Valkey (broadcast)
    **Monitoring**: Prometheus, Grafana, Loki
    **Build/Deploy**: Docker, Taskfile, GitHub Container Registry (ghcr.io)
    ```
