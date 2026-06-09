@@ -67,7 +67,7 @@ import EditionBadge from '@site/src/components/EditionBadge';
 | **Channel** | Tenant-scoped namespacing, public/user-scoped/group-scoped access patterns |
 | **Topic** | Tenant-prefixed Kafka topics, isolated consumer groups |
 | **Data** | Tenant-scoped database queries, AES-256-GCM credential encryption |
-| **Transport** | TLS for all backend connections (Kafka, NATS, Valkey) |
+| **Transport** | TLS for all backend connections (Kafka, Valkey) |
 
 ## Authentication
 [Narrative: Every connection is authenticated. Sukko validates JWTs with industry-standard algorithms...]
@@ -113,7 +113,7 @@ import EditionBadge from '@site/src/components/EditionBadge';
 ## Transport Security
 [Narrative: All backend connections support TLS encryption...]
 - Kafka/Redpanda: TLS + SASL authentication
-- NATS: TLS with CA certificate verification
+- Valkey: TLS with CA certificate verification
 - Valkey: TLS with CA certificate verification
 - Link → [Configuration Reference](./reference/configuration)
 
