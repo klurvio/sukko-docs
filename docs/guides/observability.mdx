@@ -135,6 +135,16 @@ AlertManager supports Slack, PagerDuty, OpsGenie, email, and generic webhooks. C
 
 Operators can add custom alert rules via Helm values alongside the defaults.
 
+## Broadcast Bus Metrics
+
+The broadcast bus emits three Prometheus counters from `ws-server`:
+
+| Metric | Labels | Description |
+|--------|--------|-------------|
+| `ws_broadcast_bus_dropped_total` | `tenant_id` | Messages dropped because a subscriber channel was full. Each tenant's count is tracked separately so you can identify which tenant is the bottleneck. Enterprise deployments with many tenants may disable per-tenant labeling via `BROADCAST_DROP_METRICS_TENANT_LABEL_ENABLED` (planned). |
+| `ws_broadcast_subscribe_commands_total` | `result` (`success`, `retry`, `dropped`) | SUBSCRIBE/UNSUBSCRIBE/PSUBSCRIBE/PUNSUBSCRIBE commands issued by the subscription management goroutine. A high `retry` or `dropped` rate indicates Valkey connectivity issues. |
+| `ws_broadcast_reconcile_corrections_total` | — | Subscriptions re-issued by the periodic reconciliation tick (detected missing from Valkey). Non-zero values indicate previous subscription commands were lost and recovered automatically. |
+
 ## Next Steps
 
 - **[Architecture](../concepts/architecture)** — How services connect and expose metrics
