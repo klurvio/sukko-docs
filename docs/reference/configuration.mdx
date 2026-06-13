@@ -138,7 +138,7 @@ All configurable environment variables across Sukko services. Values are set via
 | `WS_REPLAY_TIMEOUT` | time.Duration | `5s` | Handler timeouts |
 | `WS_PUBLISH_TIMEOUT` | time.Duration | `5s` |  |
 | `WS_MAX_REPLAY_MESSAGES` | int | `100` |  |
-| `WS_GAP_NOTIFY_BUFFER_SIZE` | int | `8` | Per-client gap notification channel buffer size. Valid range: 1–64. Controls how many undelivered gap notifications can queue before being dropped (reason: `buffer_full`). |
+| `WS_GAP_NOTIFY_BUFFER_SIZE` | int | `8` | Per-client gap notification channel buffer size. Valid range: 1–64. Controls how many undelivered gap notifications can queue before being dropped (reason: buffer_full). |
 | `WS_REPLAY_RATE_LIMIT_INTERVAL` | time.Duration | `10s` | Minimum interval between live replay requests per client per channel. Prevents replay storms from a single client after gap recovery. Must be > 0. |
 | `WS_TOPIC_CREATION_TIMEOUT` | time.Duration | `30s` | Topic/backend timeouts |
 | `WS_SHARD_DIAL_TIMEOUT` | time.Duration | `10s` | Orchestration |
