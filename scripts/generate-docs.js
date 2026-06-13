@@ -11,10 +11,14 @@ const path = require('path');
 const DOCS_DIR = path.join(__dirname, '..', 'docs');
 const GEN_DIR = path.join(__dirname, '..', 'generated');
 
-// Escape angle brackets in text that's outside code blocks/backticks for MDX safety
+// Escape characters that MDX would otherwise interpret as JSX/expressions
 function mdxSafe(str) {
   if (!str) return '';
-  return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return str
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\{/g, '&#123;')
+    .replace(/\}/g, '&#125;');
 }
 
 // ─── Config Reference ─────────────────────────────────────────────────────────
