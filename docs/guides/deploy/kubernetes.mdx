@@ -52,9 +52,11 @@ ws-gateway:
 ws-server:
   replicaCount: 2
   messageBackend: kafka
+  topicNamespace: prod # required — no default; the Kafka topic prefix ({namespace}.{tenant}.{category})
 
 provisioning:
   replicaCount: 1
+  topicNamespace: prod # required — provisioning always builds topic names
 
 redpanda:
   enabled: true
@@ -70,8 +72,18 @@ monitoring:
 |---------|-------------|---------|
 | `ws-gateway.replicaCount` | Gateway replicas | 1 |
 | `ws-server.messageBackend` | `direct` or `kafka` | kafka |
+| `topicNamespace` | Explicit Kafka topic namespace prefix (`{namespace}.{tenant}.{category}`) | **required, no default** |
+| `validNamespaces` | Allowed namespaces (extend if `topicNamespace` isn't `local`/`dev`/`stag`/`prod`) | `local,dev,stag,prod` |
 | `redpanda.enabled` | Deploy Redpanda (Kafka) | true |
 | `monitoring.enabled` | Deploy Prometheus + Grafana | true |
+
+:::caution `topicNamespace` is required — there is no default
+Set `topicNamespace` on every service that touches Kafka topics — **provisioning** and **push-service**
+always require it, and **ws-server** requires it when `messageBackend: kafka`. It has no default, so an
+unset value fails fast: ws-server/provisioning abort the Helm release via their config-validation hook,
+and push-service aborts the render (`required`). The value is validated against `validNamespaces` — if you
+use a namespace outside `local,dev,stag,prod`, extend `validNamespaces` to include it.
+:::
 
 ## Step 3: Deploy
 
